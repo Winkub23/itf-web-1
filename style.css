@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+}
+.navbar{
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    padding: 5px;
+    border: 0cap;
+    width: 217px;
+}
+.nav-item{
+    color: black;
+}
+.headings1{
+    text-align: center;
+    background-color: black;
+    color: red;
+}
+.p1{
+    background-color: cornsilk;
+}
