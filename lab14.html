@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="position: center;">
+    
+    <h1 id="username" style="text-align: center;">Username</h1>
+    <div id = "Profile" style=" left: 850px; position: relative; height: 200px; width: 200px; background-image: url(https://a.ltrbxd.com/resized/avatar/upload/1/6/8/3/9/0/5/1/shard/avtr-0-1000-0-1000-crop.jpg?v=f55855d1e0); background-position: center; border-radius: 100%; background-size: cover;">
+        <div style="position: absolute; bottom: 10px; right: 10px; height: 30px; width: 30px; background-color: red; border-radius: 50%; display: flex; justify-content: center;"><p>1</p></div>
+    </div>
+    
+    <div style="text-align: center;">
+        <label style="text-align: center;">Set username</label>
+        <input type="text" placeholder="Enter" id="input"><button onclick="setusername()">Set</button>
+    </div>
+    
+    <div style="text-align: center;">
+        <label>Set Profile</label>
+        <input type="text" placeholder="Enter URL" id="inputimage"><button onclick="setimage()">Set</button>
+    </div>
+    
+    <div style="text-align: center;">
+        Member Name
+    </div>
+
+    <div style="text-align: center;">
+        <input type="text" placeholder="Name" id="NameMem">
+        <input type="text" placeholder="Tel" id="Tel">
+        <button onclick="">Add Member</button>
+    </div>
+    
+    <div id="parent">
+
+    </div>
+
+    <script>
+        const username = document.getElementById("username");
+        const input = document.getElementById("input")
+        const Profile = document.getElementById("Profile")
+
+        username.textContent= "Joy";
+        console.log(Input.value);
+        
+        function setusername(){
+            username.textContent = input.value;
+            input.value = "";
+        };
+
+        function setimage(){
+            Profile.style.backgroundImage = "url(" + inputimage.value + ")"
+        }
+        function createelement(){
+            const c = document.createelement("")
+            a.textContent = "Hello";
+            document.getElementById("parent").appendChild(a);
+            console.log(a.value);
+        }
+
+        function saveCSV() {
+    const csvContent = phonenumber.map(row => row.join(",")).join("\n"); // Convert array to CSV string
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "data.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+};
+    </script>
+</body>
+</html>
