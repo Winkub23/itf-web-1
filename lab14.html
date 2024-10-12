@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body style="position: center;">
+<body style="text-align: center;">
     
     <h1 id="username" style="text-align: center;">Username</h1>
     <div id = "Profile" style=" left: 850px; position: relative; height: 200px; width: 200px; background-image: url(https://a.ltrbxd.com/resized/avatar/upload/1/6/8/3/9/0/5/1/shard/avtr-0-1000-0-1000-crop.jpg?v=f55855d1e0); background-position: center; border-radius: 100%; background-size: cover;">
@@ -25,33 +25,31 @@
     <div style="text-align: center;">
         Member Name
     </div>
-    <div style="text-align: center;">
-        <h2>Phone Number List</h2>
+    <div style="display: inline-block; text-align: left;"> <!-- Wrapper for table and inputs to center them -->
         <label for="name">Name: </label>
         <input type="text" id="name" placeholder="Name">
         <label for="tel">Tel: </label>
         <input type="text" id="tel" placeholder="Tel">
         <button id="addBtn">ADD</button>
-        <button id="exportBtn" onclick="saveCSV()">EXPORT</button>
+        <button id="exportBtn">EXPORT</button>
+
+        <table id="phoneTable" border="1" style="margin-top: 20px; width: 100%;">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added here dynamically -->
+            </tbody>
+        </table>
     </div>
 
-    <table id="phoneTable" border="1"style="margin-top: 50px; width: 100%;">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Phone Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Rows will be added here dynamically -->
-        </tbody>
-    </table>
-
     <script>
-        let count = 1;
-        const phoneNumbers = [];
-
+let count = 1;
+        
         // Add Button Click Event
         document.getElementById('addBtn').addEventListener('click', function() {
             let name = document.getElementById('name').value;
@@ -77,6 +75,29 @@
                 document.getElementById('tel').value = '';
             }
         });
+
+        // Export Button Click Event
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            let table = document.getElementById('phoneTable');
+            let rows = table.getElementsByTagName('tr');
+            let csvContent = "data:text/csv;charset=utf-8,";
+
+            for (let i = 0; i < rows.length; i++) {
+                let cols = rows[i].querySelectorAll('td, th');
+                let row = [];
+                cols.forEach(function(col) {
+                    row.push(col.innerText);
+                });
+                csvContent += row.join(",") + "\n";
+            }
+
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', 'phone_list.csv');
+            document.body.appendChild(link); // Required for Firefox
+            link.click();
+        });
         const username = document.getElementById("username");
         const input = document.getElementById("input")
         const Profile = document.getElementById("Profile")
@@ -98,21 +119,6 @@
             document.getElementById("parent").appendChild(a);
             console.log(a.value);
         }
-
-        function saveCSV() {
-    const csvContent = PhoneNumber.map(row => row.join(",")).join("\n"); // Convert array to CSV string
-        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        const url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", "data.csv");
-        link.style.visibility = "hidden";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-};
-
-        document.getElementById('exportBtn').addEventListener('click', saveCSV);
     </script>
 </body>
 </html>
